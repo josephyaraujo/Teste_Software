@@ -6,10 +6,10 @@ def classificar_triangulo(a: int, b: int, c: int) -> str:
         return "nao forma triangulo"
 
     if a == b == c:
-        return "equilatero"
+        return "equilátero"
 
     if a == b or a == c or b == c:
-        return "isoceles"
+        return "isósceles"
 
     return "escaleno"
 
@@ -26,9 +26,9 @@ def main() -> None:
     resultado = classificar_triangulo(a, b, c)
 
     if resultado == "nao forma triangulo":
-        print("As entradas nao formam um triangulo.")
+        print("As entradas nao formam um triângulo.")
     else:
-        print(f"As entradas formam um triangulo {resultado}.")
+        print(f"As entradas formam um triângulo {resultado}.")
 
 
 if __name__ == "__main__":
