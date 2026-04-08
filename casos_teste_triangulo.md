@@ -1,44 +1,68 @@
-# Casos de teste - Programa do Triângulo
+# Casos de teste - Triângulo por classes de equivalência
 
-## Objetivo
-Definir casos de teste para o programa que recebe 3 entradas inteiras e classifica o triângulo em:
-- equilátero
-- isóceles
-- escaleno
+## 1. Função analisada
+Classificar três lados informados como:
+- Equilátero
+- Isósceles
+- Escaleno
+- Inválido
 
-Também deve identificar quando as entradas não formam triângulo e quando a entrada não é inteira.
+## 2. Variáveis de entrada
+- ladoA
+- ladoB
+- ladoC
 
-## Tecnica aplicada
-Particionamento por classes de equivalência.
+## 3. Condições identificadas
+Para que o triângulo seja válido:
+- ladoA > 0
+- ladoB > 0
+- ladoC > 0
+- ladoA + ladoB > ladoC
+- ladoA + ladoC > ladoB
+- ladoB + ladoC > ladoA
 
-## Classes de equivalencia
+Para classificação:
+- ladoA = ladoB = ladoC → equilátero
+- exatamente dois lados iguais → isósceles
+- três lados diferentes → escaleno
 
-### Classes validas
-- V1: três lados inteiros positivos e iguais (equilátero)
-- V2: três lados inteiros positivos, dois iguais e um diferente, respeitando desigualdade triangular (isóceles)
-- V3: três lados inteiros positivos e todos diferentes, respeitando desigualdade triangular (escaleno)
+## 4. Classes de equivalência
 
-### Classes invalidas
-- I1: pelo menos um lado menor ou igual a zero
-- I2: lados positivos, mas violam a desigualdade triangular (a + b <= c, ou equivalente)
-- I3: pelo menos uma entrada não inteira (erro de conversão)
+### 4.1 Validade dos lados
+- CE1 válida: ladoA > 0
+- CE2 inválida: ladoA <= 0
+- CE3 válida: ladoB > 0
+- CE4 inválida: ladoB <= 0
+- CE5 válida: ladoC > 0
+- CE6 inválida: ladoC <= 0
 
-## Casos de teste representativos
+### 4.2 Desigualdade triangular
+- CE7 válida: ladoA + ladoB > ladoC
+- CE8 inválida: ladoA + ladoB <= ladoC
+- CE9 válida: ladoA + ladoC > ladoB
+- CE10 inválida: ladoA + ladoC <= ladoB
+- CE11 válida: ladoB + ladoC > ladoA
+- CE12 inválida: ladoB + ladoC <= ladoA
 
-| ID | Entradas (a, b, c) | Classe | Resultado esperado |
+### 4.3 Classificação do triângulo
+- CE13 válida: três lados iguais
+- CE14 válida: exatamente dois lados iguais
+- CE15 válida: três lados diferentes
+
+## 5. Classes impossíveis ou redundantes
+- Um triângulo equilátero nunca é escaleno.
+- Um caso inválido não deve ser simultaneamente usado para cobrir múltiplas invalidezes, recomenda-se invalidar uma condição por vez.
+
+## 6. Casos de teste mínimos
+
+| ID | Entrada (A,B,C) | Classes cobertas | Resultado esperado |
 |---|---|---|---|
-| CT01 | (3, 3, 3) | V1 | As entradas formam um triângulo equilatero. |
-| CT02 | (5, 5, 3) | V2 | As entradas formam um triângulo isoceles. |
-| CT03 | (4, 5, 6) | V3 | As entradas formam um triângulo escaleno. |
-| CT04 | (0, 4, 4) | I1 | As entradas não formam um triângulo. |
-| CT05 | (-1, 4, 4) | I1 | As entradas não formam um triângulo. |
-| CT06 | (1, 2, 3) | I2 | As entradas não formam um triângulo. |
-| CT07 | (2, 2, 4) | I2 | As entradas não formam um triângulo. |
-| CT08 | ("a", 2, 3) | I3 | Entrada invalida: digite apenas números inteiros. |
-| CT09 | (2.5, 2, 3) | I3 | Entrada invalida: digite apenas números inteiros. |
-
-## Observacoes
-- Os casos CT01 a CT03 cobrem as classes validas (tipos de triângulo).
-- Os casos CT04 a CT07 cobrem as classes invalidas de regra de negócio.
-- Os casos CT08 e CT09 cobrem a validação de tipo da entrada.
-- Com particionamento por equivalência, não e necessário testar todos os valores possíveis de cada classe; um representante por classe é suficiente para a técnica.
+| CT01 | (3,3,3) | CE1, CE3, CE5, CE7, CE9, CE11, CE13 | Equilátero |
+| CT02 | (3,3,2) | CE1, CE3, CE5, CE7, CE9, CE11, CE14 | Isósceles |
+| CT03 | (3,4,5) | CE1, CE3, CE5, CE7, CE9, CE11, CE15 | Escaleno |
+| CT04 | (0,3,4) | CE2 | Inválido |
+| CT05 | (3,0,4) | CE4 | Inválido |
+| CT06 | (3,4,0) | CE6 | Inválido |
+| CT07 | (2,3,5) | CE8 | Inválido |
+| CT08 | (2,5,3) | CE10 | Inválido |
+| CT09 | (5,2,3) | CE12 | Inválido |
