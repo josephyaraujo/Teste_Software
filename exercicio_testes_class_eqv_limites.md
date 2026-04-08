@@ -179,9 +179,9 @@ Considerando a regra geral `*@*.*`:
   - E1: Email presente e contendo:
     - parte local alfanumérica,
     - um `@`,
-    - domínio alfanumérico,
+    - domínio,
     - um `.`,
-    - TLD alfanumérico.
+    - parte final (com/br/org).
 
 - **Inválidas**
   - E2: Email ausente.
